@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+
+% for whistle tabs (fullmoon, halfmoon, newmoon)
+\usepackage{pstricks}
+\usepackage{pst-plot}
+
+% \IfStrEqCase (among other things, I guess)
+\usepackage{xstring}
+
+%to display tabs above lyrics
+\usepackage{guitar} 
+
+% make table of contents clickable
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+% change distance to border
+\usepackage{geometry}
+\geometry{left=1.8cm, right=1.8cm, top=1.8cm, bottom=1.8cm} %default margin: 2.54cm
+
+%custom commands
+\newcommand{\songtitle}[3]{
+	\subsection*{#1 {\color{gray} - #2 \small{(#3)}}}
+	\addcontentsline{toc}{subsection}{#1 {\color{gray} - #2}}}
+
+\newcommand{\songsection}[1]{{\color{gray} #1}}
+\newcommand{\songsnippet}[1]{\textit{#1}}
+
+
+\begin{document}
+	
+	\tableofcontents
+	
+	\include{./TeX_files/whistletabs}
+	
+	\include{./TeX_files/songs/nevergonnagiveyouup-rickastley}
+	\include{./TeX_files/songs/canyoufeelthelovetonight-eltonjohn}
+	
+\end{document}

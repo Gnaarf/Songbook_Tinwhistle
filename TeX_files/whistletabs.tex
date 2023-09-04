@@ -1,0 +1,59 @@
+
+\newcommand{\moon}[1]{%
+	\begingroup%
+	\psset{unit=1ex}%
+	\psset{linewidth=0.02em}%
+	\def\synodicmonth{29.530588853}%
+	\def\lunarage{#1}%
+	\edef\waxswitch{\ifdim\lunarage pt>.5\dimexpr\synodicmonth pt 1\else -1\fi}%
+	\begin{pspicture}[showgrid=false](-1.1,-.65)(1.1,1)%
+		\parametricplot[plotpoints=91]{0}{360}{t sin t cos}%
+		\pscustom[fillstyle=solid,fillcolor=black]{%
+			\parametricplot[plotpoints=91]{\waxswitch\space 180 mul}{0}{t sin t cos}%
+			\parametricplot[plotpoints=91]{0}{180}{t sin \lunarage\space \synodicmonth\space div 1 \waxswitch\space add 4 div add 360 mul cos mul t cos}%
+		}%end pscustom
+	\end{pspicture}%
+	\endgroup%
+}%end moon command
+
+\newcommand{\close}{\tiny\moon{0}}% following incremented by one 8th of \synodicmonth:
+\newcommand{\openL}{\tiny\moon{7.38}}
+\newcommand{\open}{\tiny\moon{14.77}}
+\newcommand{\openR}{\tiny\moon{22.15}}
+
+\newcommand{\whistleHelper}[6]{\hspace{-0.8em}${{{{{{{#1 \above 0pt #2} \above 0pt #3} \above 0pt #4} \above 0pt #5} \above 0pt #6} \above0pt{}}\above0pt{}}$}
+
+\newcommand{\whistleHelperPlus}[6]{\hspace{-0.8em}${{{{{{{{+ \above 0pt #1} \above 0pt #2} \above 0pt #3} \above 0pt #4} \above 0pt #5} \above 0pt #6} \above0pt{}}\above0pt{}}$}
+
+\newcommand{\whistleHelperPlusPlus}[6]{\hspace{-0.8em}${{{{{{{{++ \above 0pt #1} \above 0pt #2} \above 0pt #3} \above 0pt #4} \above 0pt #5} \above 0pt #6} \above0pt{}}\above0pt{}}$}
+
+\newcommand{\whistle}[1]{%
+	\IfStrEqCase{#1}{%
+		{D}{\whistleHelper{\close}{\close}{\close}{\close}{\close}{\close}}%
+		{Dsharp}{\whistleHelper{\close}{\close}{\close}{\close}{\close}{\openR}}%
+		{E}{\whistleHelper{\close}{\close}{\close}{\close}{\close}{\open}}%
+		{F}{\whistleHelper{\close}{\close}{\close}{\close}{\openR}{\open}}%
+		{Fsharp}{\whistleHelper{\close}{\close}{\close}{\close}{\open}{\open}}%
+		{G}{\whistleHelper{\close}{\close}{\close}{\open}{\open}{\open}}%
+		{Gsharp}{\whistleHelper{\close}{\close}{\openL}{\open}{\open}{\open}}%
+		{A}{\whistleHelper{\close}{\close}{\open}{\open}{\open}{\open}}%
+		{Asharp}{\whistleHelper{\close}{\openL}{\open}{\open}{\open}{\open}}%
+		{B}{\whistleHelper{\close}{\open}{\open}{\open}{\open}{\open}}%
+		{C}{\whistleHelper{\open}{\close}{\close}{\open}{\open}{\open}}%
+		{Csharp}{\whistleHelper{\open}{\open}{\open}{\open}{\open}{\open}}%
+		{DD}{\whistleHelperPlus{\open}{\close}{\close}{\close}{\close}{\close}}%
+}}
+
+\newcommand{\D}{\whistle{D}}
+\newcommand{\Dsharp}{\whistle{Dsharp}}
+\newcommand{\E}{\whistle{E}}
+\newcommand{\F}{\whistle{F}}
+\newcommand{\Fsharp}{\whistle{Fsharp}}
+\newcommand{\G}{\whistle{G}}
+\newcommand{\Gsharp}{\whistle{Gsharp}}
+\newcommand{\A}{\whistle{A}}
+\newcommand{\Asharp}{\whistle{Asharp}}
+\newcommand{\B}{\whistle{B}}
+\newcommand{\C}{\whistle{C}}
+\newcommand{\Csharp}{\whistle{Csharp}}
+\newcommand{\DD}{\whistle{DD}}
